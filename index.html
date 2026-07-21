@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Links</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Gerador de Links</h1>
+            <p>Upload de arquivos para gerar links customizados</p>
+        </div>
+
+        <div class="config-section">
+            <h2>⚙️ Configuração da Base URL</h2>
+            <div class="config-input">
+                <label for="baseUrl">URL Base:</label>
+                <input type="text" id="baseUrl" placeholder="https://seu-servidor.com/arquivos/">
+                <button onclick="saveBaseUrl()" class="btn-save">💾 Salvar</button>
+            </div>
+            <p class="info-text">A URL base será usada como prefixo para todos os links gerados</p>
+        </div>
+
+        <div class="upload-section">
+            <h2>📤 Upload de Arquivos</h2>
+            <div class="drop-zone" id="dropZone">
+                <input type="file" id="fileInput" multiple hidden>
+                <div class="drop-content">
+                    <p>📁 Arraste arquivos aqui ou clique para selecionar</p>
+                    <small>Você pode enviar múltiplos arquivos</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="files-section">
+            <h2>📋 Arquivos & Links Gerados</h2>
+            <div id="filesList" class="files-list">
+                <p class="empty-message">Nenhum arquivo ainda</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button onclick="clearAll()" class="btn-danger">🗑️ Limpar Tudo</button>
+            <button onclick="downloadJSON()" class="btn-primary">⬇️ Baixar como JSON</button>
+        </div>
+
+        <div class="footer">
+            <p>🚀 <a href="https://github.com/nicoildefonso68-beep/testte-gerar-link" target="_blank">Ver no GitHub</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
