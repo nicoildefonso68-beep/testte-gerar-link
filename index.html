@@ -3,8 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Links</title>
-    <link rel="stylesheet" href="style.css">
+    <title>🔗 Gerador de Links</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.config-section, .upload-section, .files-section {
+    padding: 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.config-input {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.config-input label {
+    font-weight: 600;
+    color: #555;
+    min-width: 80px;
+}
+
+.config-input input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.config-input input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.info-text {
+    margin-top: 10px;
+    color: #999;
+    font-size: 0.9em;
+}
+
+.btn-save, .btn-primary, .btn-danger {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-save {
+    background: #667eea;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: #f44336;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #da190b;
+    transform: translateY(-2px);
+}
+
+.drop-zone {
+    border: 3px dashed #667eea;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: #f8f9ff;
+}
+
+.drop-zone:hover {
+    border-color: #764ba2;
+    background: #f0f2ff;
+}
+
+.drop-zone.drag-over {
+    border-color: #764ba2;
+    background: #e8ebff;
+    transform: scale(1.02);
+}
+
+.drop-content p {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.drop-content small {
+    color: #999;
+}
+
+.files-list {
+    display: grid;
+    gap: 15px;
+}
+
+.empty-message {
+    text-align: center;
+    color: #999;
+    padding: 30px;
+    font-style: italic;
+}
+
+.file-item {
+    background: #f5f5f5;
+    border-left: 4px solid #667eea;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.file-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.file-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    word-break: break-all;
+}
+
+.file-size {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.file-link {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.file-link input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-family: monospace;
+    background: white;
+}
+
+.file-link input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.btn-copy {
+    padding: 8px 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-copy:hover {
+    background: #5568d3;
+}
+
+.btn-copy.copied {
+    background: #4CAF50;
+}
+
+.btn-delete {
+    padding: 8px 12px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-delete:hover {
+    background: #da190b;
+}
+
+.actions {
+    padding: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease-out;
+    z-index: 1000;
+}
+
+.toast.success {
+    background: #4CAF50;
+}
+
+.toast.error {
+    background: #f44336;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .config-input {
+        flex-direction: column;
+    }
+
+    .config-input input {
+        min-width: 100%;
+    }
+
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .file-link {
+        width: 100%;
+    }
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -45,12 +361,208 @@
             <button onclick="clearAll()" class="btn-danger">🗑️ Limpar Tudo</button>
             <button onclick="downloadJSON()" class="btn-primary">⬇️ Baixar como JSON</button>
         </div>
-
-        <div class="footer">
-            <p>🚀 <a href="https://github.com/nicoildefonso68-beep/testte-gerar-link" target="_blank">Ver no GitHub</a></p>
-        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+let files = [];
+let baseUrl = localStorage.getItem('baseUrl') || 'https://seu-servidor.com/arquivos/';
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('baseUrl').value = baseUrl;
+    setupDropZone();
+    setupFileInput();
+});
+
+// Drop Zone Setup
+function setupDropZone() {
+    const dropZone = document.getElementById('dropZone');
+
+    dropZone.addEventListener('click', () => {
+        document.getElementById('fileInput').click();
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('drag-over');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('drag-over');
+        handleFiles(e.dataTransfer.files);
+    });
+}
+
+// File Input Setup
+function setupFileInput() {
+    document.getElementById('fileInput').addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+}
+
+// Handle Files
+function handleFiles(fileList) {
+    for (let file of fileList) {
+        const fileId = Date.now() + Math.random();
+        const fileName = file.name;
+        const fileSize = formatFileSize(file.size);
+
+        files.push({
+            id: fileId,
+            name: fileName,
+            size: fileSize,
+            link: baseUrl + fileName
+        });
+    }
+
+    renderFiles();
+    showToast('✅ Arquivo(s) adicionado(s)!', 'success');
+}
+
+// Render Files List
+function renderFiles() {
+    const filesList = document.getElementById('filesList');
+
+    if (files.length === 0) {
+        filesList.innerHTML = '<p class="empty-message">Nenhum arquivo ainda</p>';
+        return;
+    }
+
+    filesList.innerHTML = files.map(file => `
+        <div class="file-item">
+            <div class="file-info">
+                <div class="file-name">📄 ${file.name}</div>
+                <div class="file-size">${file.size}</div>
+            </div>
+            <div class="file-link">
+                <input type="text" value="${file.link}" readonly>
+                <button class="btn-copy" onclick="copyLink('${file.id}')">📋 Copiar</button>
+                <button class="btn-delete" onclick="deleteFile('${file.id}')">🗑️</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Save Base URL
+function saveBaseUrl() {
+    const newBaseUrl = document.getElementById('baseUrl').value.trim();
+
+    if (!newBaseUrl) {
+        showToast('❌ URL base não pode estar vazia', 'error');
+        return;
+    }
+
+    baseUrl = newBaseUrl.endsWith('/') ? newBaseUrl : newBaseUrl + '/';
+
+    localStorage.setItem('baseUrl', baseUrl);
+    document.getElementById('baseUrl').value = baseUrl;
+
+    files.forEach(file => {
+        file.link = baseUrl + file.name;
+    });
+
+    renderFiles();
+    showToast('✅ URL base atualizada com sucesso!', 'success');
+}
+
+// Copy Link
+function copyLink(fileId) {
+    const file = files.find(f => f.id == fileId);
+    if (!file) return;
+
+    navigator.clipboard.writeText(file.link).then(() => {
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✅ Copiado!';
+        btn.classList.add('copied');
+
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.classList.remove('copied');
+        }, 2000);
+
+        showToast('✅ Link copiado para a área de transferência!', 'success');
+    }).catch(() => {
+        showToast('❌ Erro ao copiar link', 'error');
+    });
+}
+
+// Delete File
+function deleteFile(fileId) {
+    files = files.filter(f => f.id != fileId);
+    renderFiles();
+    showToast('🗑️ Arquivo removido', 'success');
+}
+
+// Clear All
+function clearAll() {
+    if (files.length === 0) {
+        showToast('ℹ️ Nenhum arquivo para limpar', 'error');
+        return;
+    }
+
+    if (confirm('Tem certeza que deseja limpar todos os arquivos?')) {
+        files = [];
+        renderFiles();
+        showToast('🗑️ Todos os arquivos foram removidos', 'success');
+    }
+}
+
+// Download JSON
+function downloadJSON() {
+    if (files.length === 0) {
+        showToast('❌ Nenhum arquivo para baixar', 'error');
+        return;
+    }
+
+    const data = {
+        baseUrl: baseUrl,
+        generatedAt: new Date().toLocaleString('pt-BR'),
+        totalFiles: files.length,
+        files: files.map(f => ({
+            name: f.name,
+            size: f.size,
+            link: f.link
+        }))
+    };
+
+    const jsonString = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `links-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+    showToast('⬇️ JSON baixado com sucesso!', 'success');
+}
+
+// Format File Size
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+}
+
+// Toast Notification
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+    </script>
 </body>
 </html>
