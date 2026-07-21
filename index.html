@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔗 Gerador de Links Pro</title>
+    <title>🔗 Acquax Links Manager</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode.js/1.5.3/qrcode.min.js"></script>
     <style>
 * {
@@ -14,7 +14,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e5a7a 0%, #4da6b3 100%);
     min-height: 100vh;
     padding: 20px;
 }
@@ -29,9 +29,28 @@ body {
 }
 
 .header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e5a7a 0%, #4da6b3 100%);
     color: white;
     padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.header-logo {
+    flex: 0.3;
+    min-width: 150px;
+}
+
+.header-logo img {
+    max-width: 100%;
+    height: auto;
+    filter: brightness(1.2);
+}
+
+.header-text {
+    flex: 0.7;
     text-align: center;
 }
 
@@ -42,7 +61,7 @@ body {
 
 .header p {
     font-size: 1.1em;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .config-section, .upload-section, .shortcuts-section, .search-section, .files-section, .history-section {
@@ -51,9 +70,12 @@ body {
 }
 
 h2 {
-    color: #333;
+    color: #1e5a7a;
     margin-bottom: 20px;
     font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .config-input, .search-input {
@@ -65,7 +87,7 @@ h2 {
 
 .config-input label, .search-input label {
     font-weight: 600;
-    color: #555;
+    color: #1e5a7a;
     min-width: 80px;
 }
 
@@ -81,12 +103,12 @@ h2 {
 
 .config-input input:focus, .search-input input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #4da6b3;
 }
 
 .info-text {
     margin-top: 10px;
-    color: #999;
+    color: #666;
     font-size: 0.9em;
 }
 
@@ -101,22 +123,22 @@ h2 {
 }
 
 .btn-save {
-    background: #667eea;
+    background: #1e5a7a;
     color: white;
 }
 
 .btn-save:hover {
-    background: #5568d3;
+    background: #164555;
     transform: translateY(-2px);
 }
 
 .btn-primary {
-    background: #4CAF50;
+    background: #4da6b3;
     color: white;
 }
 
 .btn-primary:hover {
-    background: #45a049;
+    background: #3d8899;
     transform: translateY(-2px);
 }
 
@@ -141,12 +163,12 @@ h2 {
 }
 
 .btn-warning {
-    background: #9C27B0;
+    background: #1e5a7a;
     color: white;
 }
 
 .btn-warning:hover {
-    background: #7B1FA2;
+    background: #164555;
     transform: translateY(-2px);
 }
 
@@ -175,17 +197,18 @@ h2 {
 .shortcut-btn {
     padding: 10px;
     background: #f0f0f0;
-    border: 2px solid #ddd;
+    border: 2px solid #4da6b3;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s;
+    color: #1e5a7a;
 }
 
 .shortcut-btn:hover {
-    background: #667eea;
+    background: #4da6b3;
     color: white;
-    border-color: #667eea;
+    border-color: #1e5a7a;
 }
 
 .shortcut-input {
@@ -202,35 +225,41 @@ h2 {
     font-size: 0.9em;
 }
 
+.shortcut-input input:focus {
+    outline: none;
+    border-color: #4da6b3;
+}
+
 .drop-zone {
-    border: 3px dashed #667eea;
+    border: 3px dashed #4da6b3;
     border-radius: 10px;
     padding: 40px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
-    background: #f8f9ff;
+    background: #f0f8fa;
 }
 
 .drop-zone:hover {
-    border-color: #764ba2;
-    background: #f0f2ff;
+    border-color: #1e5a7a;
+    background: #e8f4f7;
 }
 
 .drop-zone.drag-over {
-    border-color: #764ba2;
-    background: #e8ebff;
+    border-color: #1e5a7a;
+    background: #daeef1;
     transform: scale(1.02);
 }
 
 .drop-content p {
     font-size: 1.1em;
-    color: #333;
+    color: #1e5a7a;
     margin-bottom: 5px;
+    font-weight: 600;
 }
 
 .drop-content small {
-    color: #999;
+    color: #666;
 }
 
 .files-list {
@@ -247,7 +276,7 @@ h2 {
 
 .file-item {
     background: #f5f5f5;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #4da6b3;
     padding: 15px;
     border-radius: 8px;
     display: grid;
@@ -274,7 +303,7 @@ h2 {
 
 .file-name {
     font-weight: 600;
-    color: #333;
+    color: #1e5a7a;
     margin-bottom: 5px;
     word-break: break-all;
     display: flex;
@@ -294,7 +323,7 @@ h2 {
 
 .file-category {
     display: inline-block;
-    background: #667eea;
+    background: #4da6b3;
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
@@ -322,7 +351,7 @@ h2 {
 
 .file-link-input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #4da6b3;
 }
 
 .file-actions {
@@ -333,7 +362,7 @@ h2 {
 
 .btn-icon {
     padding: 8px 12px;
-    background: #667eea;
+    background: #4da6b3;
     color: white;
     border: none;
     border-radius: 6px;
@@ -345,7 +374,7 @@ h2 {
 }
 
 .btn-icon:hover {
-    background: #5568d3;
+    background: #3d8899;
 }
 
 .btn-icon.copied {
@@ -442,7 +471,7 @@ h2 {
 
 .edit-content h3 {
     margin-bottom: 20px;
-    color: #333;
+    color: #1e5a7a;
 }
 
 .edit-content input {
@@ -456,7 +485,7 @@ h2 {
 
 .edit-content input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #4da6b3;
 }
 
 .edit-buttons {
@@ -475,7 +504,7 @@ h2 {
 }
 
 .edit-buttons .btn-save {
-    background: #4CAF50;
+    background: #4da6b3;
     color: white;
 }
 
@@ -497,7 +526,7 @@ h2 {
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s;
-    border-left: 3px solid #667eea;
+    border-left: 3px solid #4da6b3;
 }
 
 .history-item:hover {
@@ -546,6 +575,11 @@ h2 {
 }
 
 @media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
     .header h1 {
         font-size: 1.8em;
     }
@@ -579,15 +613,20 @@ h2 {
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔗 Gerador de Links Pro</h1>
-            <p>Upload de arquivos para gerar links customizados - Versão Avançada</p>
+            <div class="header-logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Ctext x='10' y='50' font-size='36' font-weight='bold' fill='%231e5a7a'%3EAcquax%3C/text%3E%3Ctext x='10' y='70' font-size='12' fill='%234da6b3'%3EDO BRASIL%3C/text%3E%3C/svg%3E" alt="Acquax">
+            </div>
+            <div class="header-text">
+                <h1>🔗 Links Manager</h1>
+                <p>Gerencie seus links do Backblaze com segurança</p>
+            </div>
         </div>
 
         <div class="config-section">
             <h2>⚙️ Configuração da Base URL</h2>
             <div class="config-input">
                 <label for="baseUrl">URL Base:</label>
-                <input type="text" id="baseUrl" placeholder="https://seu-servidor.com/arquivos/">
+                <input type="text" id="baseUrl" placeholder="https://cdn.acquaxcontrol.com.br/">
                 <button onclick="saveBaseUrl()" class="btn-save">💾 Salvar</button>
             </div>
             <p class="info-text">A URL base será usada como prefixo para todos os links gerados</p>
@@ -623,7 +662,7 @@ h2 {
             </div>
             <div style="margin-top: 10px;">
                 <label>Filtrar por categoria:</label>
-                <select id="categoryFilter" onchange="filterFiles()" style="padding: 8px; border-radius: 6px; border: 2px solid #ddd;">
+                <select id="categoryFilter" onchange="filterFiles()" style="padding: 8px; border-radius: 6px; border: 2px solid #4da6b3; color: #1e5a7a; font-weight: 600;">
                     <option value="">Todas</option>
                     <option value="Imagem">Imagem</option>
                     <option value="Documento">Documento</option>
@@ -662,7 +701,7 @@ h2 {
     <div class="qr-modal" id="qrModal">
         <div class="qr-content">
             <span class="qr-close" onclick="closeQR()">&times;</span>
-            <h3>QR Code</h3>
+            <h3 style="color: #1e5a7a;">📱 QR Code</h3>
             <div id="qrCode" style="margin: 20px 0;"></div>
             <p id="qrUrl" style="word-break: break-all; font-size: 0.9em; color: #666;"></p>
         </div>
@@ -674,7 +713,7 @@ h2 {
             <h3>✏️ Editar Link</h3>
             <input type="text" id="editInput" placeholder="Digite o novo caminho">
             <div class="edit-buttons">
-                <button class="btn-save" onclick="saveEdit()">✅ Salvar</button>
+                <button class="btn-save" onclick="saveEdit()" style="background: #4da6b3;">✅ Salvar</button>
                 <button class="btn-cancel" onclick="closeEdit()">❌ Cancelar</button>
             </div>
         </div>
@@ -683,7 +722,7 @@ h2 {
     <script>
 let files = [];
 let shortcuts = [];
-let baseUrl = localStorage.getItem('baseUrl') || 'https://seu-servidor.com/arquivos/';
+let baseUrl = localStorage.getItem('baseUrl') || 'https://cdn.acquaxcontrol.com.br/';
 let history = JSON.parse(localStorage.getItem('linkHistory')) || [];
 let currentEditId = null;
 
@@ -874,7 +913,7 @@ function renderFiles() {
                     <button class="btn-icon" onclick="copyLink('${file.id}')">📋 Copiar</button>
                     <button class="btn-icon edit" onclick="openEdit('${file.id}')">✏️ Editar</button>
                     <button class="btn-icon success" onclick="generateQR('${file.id}')">📱 QR</button>
-                    <button class="btn-icon warning" onclick="shareEmail('${file.id}')">📧 Email</button>
+                    <button class="btn-icon warning" onclick="shareEmail('${file.id}')" style="background: #FF9800;">📧 Email</button>
                     <button class="btn-icon delete" onclick="deleteFile('${file.id}')">🗑️</button>
                 </div>
             </div>
@@ -916,7 +955,7 @@ function filterFiles() {
                     <button class="btn-icon" onclick="copyLink('${file.id}')">📋 Copiar</button>
                     <button class="btn-icon edit" onclick="openEdit('${file.id}')">✏️ Editar</button>
                     <button class="btn-icon success" onclick="generateQR('${file.id}')">📱 QR</button>
-                    <button class="btn-icon warning" onclick="shareEmail('${file.id}')">📧 Email</button>
+                    <button class="btn-icon warning" onclick="shareEmail('${file.id}')" style="background: #FF9800;">📧 Email</button>
                     <button class="btn-icon delete" onclick="deleteFile('${file.id}')">🗑️</button>
                 </div>
             </div>
@@ -1091,7 +1130,7 @@ function downloadTXT() {
         return;
     }
 
-    let txtContent = '🔗 GERADOR DE LINKS PRO\n';
+    let txtContent = '🔗 ACQUAX LINKS MANAGER\n';
     txtContent += '═════════════════════════════════════\n\n';
     txtContent += `URL Base: ${baseUrl}\n`;
     txtContent += `Gerado em: ${new Date().toLocaleString('pt-BR')}\n`;
@@ -1110,7 +1149,7 @@ function downloadTXT() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `links-${Date.now()}.txt`;
+    a.download = `acquax-links-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
 
@@ -1124,6 +1163,7 @@ function downloadJSON() {
     }
 
     const data = {
+        empresa: 'Acquax do Brasil',
         baseUrl: baseUrl,
         generatedAt: new Date().toLocaleString('pt-BR'),
         totalFiles: files.length,
@@ -1141,7 +1181,7 @@ function downloadJSON() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `links-${Date.now()}.json`;
+    a.download = `acquax-links-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
 
